@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikipedia Rabbit Hole Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="quiz-modal" id="quiz-modal">
+        <div class="quiz-content">
+            <h2>Let's Get to Know You!</h2>
+            <form id="quiz-form">
+                <div class="quiz-question">
+                    <label>1. What is your favorite subject in school?</label>
+                    <input type="text" name="q1" required />
+                </div>
+                <div class="quiz-question">
+                    <label>2. What do you enjoy doing most in your free time?</label>
+                    <input type="text" name="q2" required />
+                </div>
+                <div class="quiz-question">
+                    <label>3. If you could learn about anything, what would it be?</label>
+                    <input type="text" name="q3" required />
+                </div>
+                <div class="quiz-question">
+                    <label>4. Who is someone you admire or look up to?</label>
+                    <input type="text" name="q4" required />
+                </div>
+                <div class="quiz-question">
+                    <label>5. What is a topic you’ve always been curious about?</label>
+                    <input type="text" name="q5" required />
+                </div>
+                <button type="submit" class="quiz-submit-btn">Show My Topics</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="open-interest-btn" class="open-interest-btn">🤩 What interests you today?</button>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    🐰🕳️
+                    Rabbit Hole Explorer
+                </h1>
+                <p class="subtitle">Discover the endless connections of knowledge</p>
+                <p class="kids-slogan">✨ Be cooler than all the other kids! ✨</p>
+            </div>
+        </header>
+
+        <div id="recommended-section" class="recommended-section hidden">
+            <h3>Recommended Based on Your Interests:</h3>
+            <div id="recommended-tags" class="interest-tags">
+                <!-- Quiz recommendations will be added here -->
+            </div>
+        </div>
+
+        <!-- Interest Input Section -->
+        <section id="interest-section" class="interest-section">
+            <div class="interest-container">
+                <h2>What interests you today?</h2>
+                <p>Tell us what you'd like to explore, and we'll create a personalized Wikipedia journey for you.</p>
+                
+                <div class="input-group">
+                    <input type="text" id="interest-input" placeholder="Enter an interest and press Enter to add it..." autocomplete="off">
+                    <button id="add-interest-btn" class="add-interest-btn">
+                        <i class="fas fa-plus"></i>
+                        Add 🚀
+                    </button>
+                </div>
+                
+                <div id="interest-tabs" class="interest-tabs">
+                    <!-- Interest tabs will be added here -->
+                </div>
+                
+                <div class="finish-group">
+                    <button id="finish-btn" class="finish-btn" disabled>
+                        <i class="fas fa-rocket"></i>
+                        Start Exploration 🎉
+                    </button>
+                </div>
+
+                <div class="interest-sections-row">
+                    <div id="for-you-section" class="for-you-section hidden">
+                        <div class="for-you-header-row">
+                            <h3>For You:</h3>
+                            <button id="clear-for-you-btn" class="clear-for-you-btn" title="Clear all interests">
+                                <i class="fas fa-trash"></i> Clear All
+                            </button>
+                        </div>
+                        <div id="for-you-tags" class="interest-tags">
+                            <!-- Personalized interests will be added here -->
+                        </div>
+                    </div>
+                    <div class="quick-interests">
+                        <div class="quick-header-row">
+                            <h3>Quick Start Ideas:</h3>
+                            <button id="refresh-quick-btn" class="refresh-quick-btn clear-for-you-btn" title="Refresh topics">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                        <div id="quick-tags" class="interest-tags">
+                            <span class="interest-tag" data-interest="quantum physics">Quantum Physics</span>
+                            <span class="interest-tag" data-interest="ancient Rome">Ancient Rome</span>
+                            <span class="interest-tag" data-interest="jazz music">Jazz Music</span>
+                            <span class="interest-tag" data-interest="space exploration">Space Exploration</span>
+                            <span class="interest-tag" data-interest="artificial intelligence">AI</span>
+                            <span class="interest-tag" data-interest="medieval history">Medieval History</span>
+                            <span class="interest-tag" data-interest="marine biology">Marine Biology</span>
+                            <span class="interest-tag" data-interest="philosophy">Philosophy</span>
+                            <span class="interest-tag" data-interest="space exploration, astronomy, planets">Space & Planets</span>
+                            <span class="interest-tag" data-interest="ancient Rome, Roman Empire, gladiators">Roman Empire</span>
+                            <span class="interest-tag" data-interest="jazz music, blues, musicians">Jazz & Blues</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Section -->
+        <section id="loading-section" class="loading-section hidden">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <h3>Exploring Wikipedia...</h3>
+                <p>Finding the perfect starting point for your journey</p>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-section hidden">
+            <div class="results-header">
+                <h2>Your Wikipedia Journey</h2>
+                <button id="new-journey-btn" class="new-journey-btn">
+                    <i class="fas fa-plus"></i>
+                    Start New Journey 🦄
+                </button>
+            </div>
+
+            <div class="explore-counter">
+                Pages explored: <span id="explore-count">0</span>
+            </div>
+
+            <!-- Progress bar removed -->
+
+            <div class="suggestions-container">
+                <div id="suggestions-loading" class="suggestions-loading hidden">
+                    <div class="spinner"></div>
+                    <span>Loading new suggestions...</span>
+                </div>
+                <h3>Suggested Pages</h3>
+                <div id="active-interests" class="active-interests">
+                    <!-- Active interests will be shown here -->
+                </div>
+                <div id="suggestions-list" class="suggestions-list">
+                    <!-- Suggestions will be populated here -->
+                </div>
+            </div>
+
+            <div class="explored-pages">
+                <button id="exploration-tree-tab" class="exploration-tree-tab" aria-expanded="false">
+                    <span>▼</span> Exploration Tree 🌳
+                </button>
+                <div id="exploration-tree-panel" class="exploration-tree-panel collapsed">
+                    <div id="explored-list" class="explored-timeline">
+                        <!-- Tree nodes will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Section -->
+        <section id="error-section" class="error-section hidden">
+            <div class="error-container">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Oops! Something went wrong</h3>
+                <p id="error-message">We couldn't find what you're looking for. Try a different search term.</p>
+                <button id="try-again-btn" class="try-again-btn">Try Again 😺</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Wikipedia Page Modal -->
+    <div id="page-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Page Title</h3>
+                <button id="close-modal" class="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-content">
+                    <!-- Page content will be loaded here -->
+                </div>
+                <div id="modal-image-container" class="modal-image-container">
+                    <div id="modal-image-loading" class="modal-image-loading hidden">
+                        <div class="spinner"></div>
+                        <span>Loading media...</span>
+                    </div>
+                    <video id="modal-video" class="modal-video" controls style="display:none; max-width:90%; max-height:220px; border-radius:12px; box-shadow:0 4px 18px rgba(44,90,160,0.10); background:#f5f7fa;"></video>
+                    <img id="modal-image" class="modal-image" src="" alt="Related visual" style="display:none;" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="wikipedia-link" href="#" target="_blank" class="wikipedia-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    Read on Wikipedia
+                </a>
+                <button id="done-btn" class="done-btn">
+                    <i class="fas fa-check"></i>
+                    Done 👍
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
